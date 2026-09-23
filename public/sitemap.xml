@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.giallozafferano.it/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Categorie -->
+  <url>
+    <loc>https://www.giallozafferano.it/ricette/primi-piatti</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricette/secondi-piatti</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricette/dolci</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricette/antipasti</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricette/contorni</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricette/pane-e-pizza</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricette/pesce</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricette/verdure</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Ricette Principali -->
+  <url>
+    <loc>https://www.giallozafferano.it/ricetta/carbonara</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1612874742237-6526221588e3?w=1200</image:loc>
+      <image:title>Carbonara - Pasta alla Carbonara</image:title>
+      <image:caption>La classica pasta alla carbonara con guanciale, uova e pecorino romano</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricetta/tiramisu</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=1200</image:loc>
+      <image:title>Tiramisù - Ricetta Originale</image:title>
+      <image:caption>Il dolce italiano per eccellenza con mascarpone, savoiardi e caffè</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricetta/lasagne-bolognese</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=1200</image:loc>
+      <image:title>Lasagne alla Bolognese</image:title>
+      <image:caption>Le tradizionali lasagne con ragù alla bolognese e besciamella</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/ricetta/pizza-margherita</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=1200</image:loc>
+      <image:title>Pizza Margherita</image:title>
+      <image:caption>La pizza napoletana con pomodoro San Marzano, mozzarella e basilico</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Video Ricette -->
+  <url>
+    <loc>https://www.giallozafferano.it/video-ricette</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Pagine informative -->
+  <url>
+    <loc>https://www.giallozafferano.it/chi-siamo</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/contatti</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/privacy-policy</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.giallozafferano.it/cookie-policy</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
