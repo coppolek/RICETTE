@@ -1,0 +1,19 @@
+# ============================================
+# GialloZafferano - Hostinger Root Config
+# ============================================
+
+app:
+  name: "giallozafferano"
+  type: "docker"
+  
+docker:
+  dockerfile: "./Dockerfile"
+  compose: "./docker-compose.yml"
+  
+deploy:
+  region: "eu-west"
+  plan: "vps-2"
+  
+health:
+  path: "/health"
+  interval: 30

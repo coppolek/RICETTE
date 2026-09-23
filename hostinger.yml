@@ -1,0 +1,63 @@
+# ============================================
+# GialloZafferano - Hostinger Configuration
+# File di configurazione per deploy automatico
+# ============================================
+
+version: '1.0'
+
+# Informazioni progetto
+project:
+  name: "GialloZafferano"
+  description: "Clone del sito GialloZafferano - Ricette di cucina italiane"
+  type: "static"
+  framework: "react"
+  buildTool: "vite"
+
+# Configurazione build
+build:
+  command: "npm run build"
+  outputDir: "dist"
+  nodeVersion: "20"
+
+# Configurazione Docker
+docker:
+  enabled: true
+  dockerfile: "Dockerfile"
+  composeFile: "docker-compose.yml"
+
+# Configurazione deploy
+deploy:
+  type: "docker"
+  replicas: 1
+  healthCheck:
+    path: "/health"
+    interval: 30
+    timeout: 10
+  resources:
+    cpu: "0.5"
+    memory: "512Mi"
+
+# Configurazione dominio
+domains:
+  primary: "giallozafferano.it"
+  aliases:
+    - "www.giallozafferano.it"
+
+# SSL/TLS
+ssl:
+  enabled: true
+  provider: "letsencrypt"
+  autoRenew: true
+
+# Environment variables
+env:
+  NODE_ENV: "production"
+  TZ: "Europe/Rome"
+
+# Monitoring
+monitoring:
+  enabled: true
+  alerts:
+    - type: "downtime"
+      threshold: 5
+      notification: "email"

@@ -1,0 +1,51 @@
+# ============================================
+# GialloZafferano - Docker Compose
+# Configurazione per Hostinger VPS
+# ============================================
+
+version: '3.8'
+
+services:
+  # Applicazione Web
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: giallozafferano-app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Mount SSL certificates (se necessari)
+      - ./ssl:/etc/nginx/ssl:ro
+      # Logs
+      - ./logs/nginx:/var/log/nginx
+    environment:
+      - NODE_ENV=production
+      - TZ=Europe/Rome
+    networks:
+      - giallozafferano-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  giallozafferano-network:
+    driver: bridge
