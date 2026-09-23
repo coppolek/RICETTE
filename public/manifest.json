@@ -1,0 +1,22 @@
+{
+  "name": "GialloZafferano - Ricette di Cucina Italiane",
+  "short_name": "GialloZafferano",
+  "description": "Scopri migliaia di ricette italiane facili e veloci con foto passo passo e video tutorial.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FFD700",
+  "orientation": "portrait-primary",
+  "lang": "it",
+  "categories": ["food", "cooking", "recipes"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

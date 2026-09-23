@@ -1,0 +1,30 @@
+# GialloZafferano - Robots.txt
+# Ottimizzato per VPS Hostinger
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+
+# Sitemap
+Sitemap: https://www.giallozafferano.it/sitemap.xml
+
+# Crawl-delay per non sovraccaricare il server
+Crawl-delay: 1
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
