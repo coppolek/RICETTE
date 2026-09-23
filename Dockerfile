@@ -3,57 +3,53 @@
 # Multi-stage build per produzione
 # Ottimizzato per Hostinger VPS
 # ============================================
-
-# Stage 1: Build
-FROM node:20-alpine AS builder
+# Stage 1: Build Frontend (Vite) and Backend (Express bundle)
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copia package files per cache layer
-COPY package.json package-lock.json* ./
+# Install build dependencies
+COPY package*.json ./
+RUN npm install
 
-# Installa dipendenze
-RUN npm ci --only=production && npm cache clean --force
-
-# Copia sorgente
+# Copy source code and configurations
 COPY . .
 
-# Build produzione
+# Build Vite client to dist/ and bundle server.ts to dist/server.cjs
+ENV NODE_ENV=production
 RUN npm run build
 
-# Stage 2: Production con Nginx
-FROM nginx:1.25-alpine AS production
+# ==============================================================================
+# Stage 2: Production Runner
+FROM node:22-alpine AS runner
 
-# Rimuovi config default nginx
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-# Copia config nginx ottimizzata
-COPY hostinger/docker-nginx.conf /etc/nginx/conf.d/default.conf
+ENV NODE_ENV=production
+ENV PORT=3000
 
-# Copia build dal stage 1
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Install curl/wget for healthchecks
+RUN apk add --no-cache curl wget
 
-# Copia file statici pubblici
-COPY --from=builder /app/public/robots.txt /usr/share/nginx/html/
-COPY --from=builder /app/public/sitemap.xml /usr/share/nginx/html/
-COPY --from=builder /app/public/manifest.json /usr/share/nginx/html/
-COPY --from=builder /app/public/favicon.svg /usr/share/nginx/html/
+# Install only production dependencies
+COPY package*.json ./
+RUN npm install --omit=dev && npm cache clean --force
 
-# Crea utente non-root per sicurezza
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nginx -u 1001 && \
-    chown -R nginx:nodejs /usr/share/nginx/html && \
-    chown -R nginx:nodejs /var/cache/nginx && \
-    chown -R nginx:nodejs /var/log/nginx && \
-    touch /var/run/nginx.pid && \
-    chown -R nginx:nodejs /var/run/nginx.pid
+# Copy compiled files from builder
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/firebase-applet-config.json ./firebase-applet-config.json
+COPY --from=builder /app/firebase-blueprint.json ./firebase-blueprint.json
 
-# Healthcheck
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:80/health || exit 1
+# Create directory for logs if needed and set ownership to node user
+RUN mkdir -p /app/logs && chown -R node:node /app
 
-# Esponi porta
-EXPOSE 80
+# Run as non-privileged user for security
+USER node
 
-# Avvia nginx
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+# Docker healthcheck querying the /api/health endpoint
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -qO- http://localhost:3000/api/health || exit 1
+
+CMD ["node", "dist/server.js"]
