@@ -3,49 +3,37 @@
 # Configurazione per Hostinger VPS
 # ============================================
 
-version: '3.8'
-
 services:
-  # Applicazione Web
-  app:
+  affitti-milano:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: giallozafferano-app
+    image: affitti-milano:latest
+    container_name: affitti_milano_app
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      # Mount SSL certificates (se necessari)
-      - ./ssl:/etc/nginx/ssl:ro
-      # Logs
-      - ./logs/nginx:/var/log/nginx
+      # Exposes port 3000 directly on VPS IP and allows Nginx reverse proxy
+      - "${PORT:-3000}:3070"
+    env_file:
+      - path: .env
+        required: false
     environment:
       - NODE_ENV=production
-      - TZ=Europe/Rome
-    networks:
-      - giallozafferano-network
+      - PORT=3000
+    # Healthcheck to ensure container is responding
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/health"]
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/health || exit 1"]
       interval: 30s
-      timeout: 10s
+      timeout: 5s
       retries: 3
-      start_period: 40s
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 1G
-        reservations:
-          cpus: '0.5'
-          memory: 256M
+      start_period: 15s
+    # Log rotation limits to prevent Hostinger VPS disk space exhaustion
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-
-networks:
-  giallozafferano-network:
-    driver: bridge
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
